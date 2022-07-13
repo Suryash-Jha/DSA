@@ -6,17 +6,15 @@
 #include<bits/stdc++.h>
 using namespace std;
 unordered_map<int, vector<int>> adjList;
-void createAdjList(unordered_multimap<int, int> &edges, int n, int m, bool direction){
-    
-    for(auto it: edges){
-            //  cout<<it.first<<" "<<it.second<<endl;
-        adjList[it.first].push_back(it.second);
-        if(!direction)
-        adjList[it.second].push_back(it.first);
-        // cout<<it.first<" "<<it.second<<endl;
-        
-    }
-
+void createAdjList(int n, int m, bool direction){
+    cout<<"Enter all edges: ";
+  for(int i=0; i<m; i++){
+    int u, v;
+    cin>>u>>v;
+    adjList[u].push_back(v);
+    if(!direction)
+    adjList[u].push_back(v);
+  }
     
 }
 
@@ -51,23 +49,23 @@ void bfs(unordered_map<int, vector<int>> &adjList, int n, int m, int node){
 
 }
 
+/*
+-    {4, 5},
+-    {5, 6},
+-    {6, 7},
+-    {5, 8},
+-    {8, 7},
+-    {7, 9}
+
+*/
 
 int main()
 {
-bool direction=0;
-unordered_multimap<int, int> edges={
-    {4, 5},
-    {5, 6},
-    {6, 7},
-    {5, 8},
-    {8, 7},
-    {7, 9}
-
-};
-int m= edges.size();
-int n= 6;
-createAdjList(edges, n, m, direction);
-// printAdjList();
+bool direction=1;
+int n, m;
+cin>>n>>m;
+createAdjList(n, m, direction);
+printAdjList();
 
 bfs(adjList, n, m, 4);
 }
